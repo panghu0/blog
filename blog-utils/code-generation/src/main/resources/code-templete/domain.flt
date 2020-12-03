@@ -1,0 +1,41 @@
+package ${packagePath}.bo.auto.${item.schemaName};
+
+import java.io.Serializable;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+<#list importList as item>
+${item!''}
+</#list>
+import com.zhongrui.bo.base.BaseBo;
+
+@ApiModel(value = "${item.modelName}", description = "${item.tableComment}")
+public class ${item.modelName} extends BaseBo implements Serializable {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+<#list proList as item>
+    @ApiModelProperty(value="${item.modelComment!''}")
+    private ${item.modelType} ${item.modelName};
+</#list>
+	<#list proList as item>
+   	public ${item.modelType} get${item.modelNameFirstUpper}() {
+		return ${item.modelName};
+	}
+
+	public void set${item.modelNameFirstUpper}(${item.modelType} ${item.modelName}) {
+		this.${item.modelName} = ${item.modelName};
+	}
+	
+	</#list>
+
+	@Override
+	public String toString() {
+		return String.format("${item.modelName} [<#list proList as item>, ${item.modelName}=%s</#list>]"
+					  <#list proList as item>, ${item.modelName}</#list>);
+	}
+
+}

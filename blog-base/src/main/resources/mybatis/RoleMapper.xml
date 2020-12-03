@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper 
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhongrui.dao.auto.blog.RoleDao">
+
+	<resultMap type="cn.panghu.blog.base.pojo.Role" id="RoleResult">
+		<result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="roleName" column="role_name" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="status" column="status" jdbcType="INTEGER"/>
+	</resultMap>
+	
+	<sql id="Base_Column_List">
+		id,
+    	<trim prefix="" suffix="" suffixOverrides=",">
+	     		role_name,
+	     		create_time,
+	     		update_time,
+	     		status,
+    	</trim>
+    </sql>
+    
+    <sql id="selectCondition">
+    		<if test="roleName != null ">
+				and role_name = #{roleName}
+			</if>
+    		<if test="createTime != null ">
+				and create_time = #{createTime}
+			</if>
+    		<if test="updateTime != null ">
+				and update_time = #{updateTime}
+			</if>
+    		<if test="status != null ">
+				and status = #{status}
+			</if>
+	</sql>
+    
+	<!-- 根据ID查询Role -->
+	<select id="findById" parameterType="java.lang.Integer"	resultMap="RoleResult">
+		SELECT 
+		<include refid="Base_Column_List" />
+		FROM tb_role WHERE id = #{id}
+	</select>
+	
+	<!-- 根据ID删除 -->
+	<select id="deleteById" parameterType="java.lang.Integer">
+		DELETE 
+		FROM tb_role WHERE id = #{id}
+	</select>
+	
+	<!--保存 -->
+    <insert id="save" useGeneratedKeys="true" keyProperty="id" keyColumn="id" parameterType="cn.panghu.blog.base.pojo.Role">
+        insert into tb_role
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+	        		<if test="roleName != null">
+	                	role_name,
+	            	</if>
+	        		<if test="createTime != null">
+	                	create_time,
+	            	</if>
+	        		<if test="updateTime != null">
+	                	update_time,
+	            	</if>
+	        		<if test="status != null">
+	                	status,
+	            	</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+        			<if test="roleName != null">
+	        			#{roleName, jdbcType=VARCHAR},
+	            	</if>
+        			<if test="createTime != null">
+	        			#{createTime, jdbcType=TIMESTAMP},
+	            	</if>
+        			<if test="updateTime != null">
+	        			#{updateTime, jdbcType=TIMESTAMP},
+	            	</if>
+        			<if test="status != null">
+	        			#{status, jdbcType=INTEGER},
+	            	</if>
+        </trim>
+    </insert>
+    
+    <!--保存 (包含主键)-->
+    <insert id="saveAll" parameterType="cn.panghu.blog.base.pojo.Role">
+        insert into tb_role
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+        	"id",
+	        		<if test="roleName != null">
+	                	role_name,
+	            	</if>
+	        		<if test="createTime != null">
+	                	create_time,
+	            	</if>
+	        		<if test="updateTime != null">
+	                	update_time,
+	            	</if>
+	        		<if test="status != null">
+	                	status,
+	            	</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+        	#{id, jdbcType=INTEGER},
+        			<if test="roleName != null">
+	        			#{roleName, jdbcType=VARCHAR},
+	            	</if>
+        			<if test="createTime != null">
+	        			#{createTime, jdbcType=TIMESTAMP},
+	            	</if>
+        			<if test="updateTime != null">
+	        			#{updateTime, jdbcType=TIMESTAMP},
+	            	</if>
+        			<if test="status != null">
+	        			#{status, jdbcType=INTEGER},
+	            	</if>
+        </trim>
+    </insert>
+    
+    <!--修改 -->
+    <update id="update" parameterType="cn.panghu.blog.base.pojo.Role">
+        update tb_role
+        <set>
+	                <if test="roleName != null">
+                        role_name = #{roleName, jdbcType=VARCHAR},
+                    </if>
+	                <if test="createTime != null">
+                        create_time = #{createTime, jdbcType=TIMESTAMP},
+                    </if>
+	                <if test="updateTime != null">
+                        update_time = #{updateTime, jdbcType=TIMESTAMP},
+                    </if>
+	                <if test="status != null">
+                        status = #{status, jdbcType=INTEGER},
+                    </if>
+        </set>
+        where 
+			id = #{id}
+    </update>
+    
+    <!-- 分页查询Role -->
+	<select id="findByPage" parameterType="cn.panghu.blog.base.pojo.Role"	resultMap="RoleResult">
+		SELECT 
+			<include refid="Base_Column_List" />
+		FROM tb_role 
+		<where>
+			<include refid="selectCondition" />
+		</where> 
+		ORDER BY id asc
+	</select>
+	
+	<!--批量保存 -->
+    <insert id="batchSave" useGeneratedKeys="true" keyProperty="id" keyColumn="id" parameterType="java.util.List">
+        insert into tb_role 
+        	<trim prefix="(" suffix=")" suffixOverrides=",">
+	        			role_name,
+	        			create_time,
+	        			update_time,
+        	</trim>
+        values
+        	<foreach collection="list" item="it" separator=",">
+        		<trim prefix="(" suffix=")" suffixOverrides=",">
+	        				#{it.roleName, jdbcType=VARCHAR},
+	        				#{it.createTime, jdbcType=TIMESTAMP},
+	        				#{it.updateTime, jdbcType=TIMESTAMP},
+	        	</trim>
+        	</foreach>
+    </insert>
+    
+    <!--批量保存(包含主键) -->
+    <insert id="batchSaveAll" parameterType="java.util.List">
+        insert into tb_role 
+        	<trim prefix="(" suffix=")" suffixOverrides=",">
+        		"id",
+	        		role_name,
+	        		create_time,
+	        		update_time,
+	        		status,
+        	</trim>
+        values
+        	<foreach collection="list" item="it" separator=",">
+        		<trim prefix="(" suffix=")" suffixOverrides=",">
+        			#{it.id, jdbcType=INTEGER},
+	    				#{it.roleName, jdbcType=VARCHAR},
+	    				#{it.createTime, jdbcType=TIMESTAMP},
+	    				#{it.updateTime, jdbcType=TIMESTAMP},
+	    				#{it.status, jdbcType=INTEGER},
+	        	</trim>
+        	</foreach>
+    </insert>
+	
+	
+	<!-- 批量删除 -->
+	<delete id="batchDelete" parameterType="java.util.List">
+        delete from tb_role where id in 
+	        <foreach collection="ids" item="id" separator="," open="(" close=")">
+	            #{id}
+	        </foreach>
+	</delete>
+</mapper>		

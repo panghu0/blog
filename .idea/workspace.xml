@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="44093dbb-96f9-4b8e-a0b6-092e4a1d545c" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/blog-ui/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/blog-ui/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog-ui/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/blog-ui/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog-ui/public/favicon.ico" beforeDir="false" afterPath="$PROJECT_DIR$/blog-ui/public/favicon.ico" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog-ui/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/blog-ui/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog-ui/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/blog-ui/src/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog-ui/src/assets/logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog-ui/src/components/HelloWorld.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog-ui/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/blog-ui/src/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog-ui/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/blog-ui/src/router/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog-ui/src/store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/blog-ui/src/store/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog-ui/src/views/About.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog-ui/src/views/Home.vue" beforeDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Enum" />
+        <option value="Interface" />
+        <option value="Class" />
+        <option value="xml file" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/blog-ui" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="D:/IntelliJ IDEA 2019/maven-3.6.1" />
+        <option name="userSettingsFile" value="D:\IntelliJ IDEA 2019\maven-3.6.1\conf\settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+        <option name="jdkForImporter" value="1.8" />
+        <option name="vmOptionsForImporter" value="-Xmx768m" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1byP2PHKQcvuahNnN9RVet30d4c" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="PropertiesComponent">
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="jdk.selected.JAVA_MODULE" value="1.8" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/blog-base/src/main/java/cn/panghu/blog/base/dao" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="MavenSettings" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\blog\blog-base\src\main\resources\mybatis" />
+      <recent name="E:\blog\blog-web\src\main\resources" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\blog\blog-base\src\main\java\cn\panghu\blog\base\dao" />
+      <recent name="E:\blog\blog-base\src\main\resources\mybatis" />
+      <recent name="E:\blog\blog-base\src\main\java\cn\panghu\blog\base\pojo" />
+      <recent name="E:\blog\blog-web\src\main\java\cn\panghu\blog\dao" />
+      <recent name="E:\blog\blog-model\src\main\java\cn\panghu\blog\model\pojo" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="cn.panghu.blog.common.utils" />
+      <recent name="cn.panghu.blog.common" />
+      <recent name="cn.panghu.blog.common.data" />
+      <recent name="cn.panghu.blog.common.spring" />
+      <recent name="cn.panghu.blog.common.result" />
+    </key>
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="cn.panghu.blog.service" />
+      <recent name="cn.panghu.blog.dao" />
+      <recent name="cn.panghu.blog.dao.UserDao" />
+      <recent name="cn.panghu.blog.service.UserService" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Spring Boot.Application">
+    <configuration name="Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="test.Test" />
+      <module name="blog-web" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Application (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="blog-model" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="cn.panghu.blog.model.Application" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Application (2)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="blog-common" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="cn.panghu.blog.common.Application" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="blog-web" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="cn.panghu.blog.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="cn.panghu.blog.Application" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.Test" />
+      <item itemvalue="Spring Boot.Application (1)" />
+      <item itemvalue="Spring Boot.Application (2)" />
+      <item itemvalue="Spring Boot.Application" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Spring Boot.Application" />
+        <item itemvalue="Application.Test" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="44093dbb-96f9-4b8e-a0b6-092e4a1d545c" name="Default Changelist" comment="" />
+      <created>1589601152511</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1589601152511</updated>
+      <workItem from="1589601156017" duration="14122000" />
+      <workItem from="1589682970392" duration="6679000" />
+      <workItem from="1590197817772" duration="24000" />
+      <workItem from="1590802740588" duration="2024000" />
+      <workItem from="1590831775675" duration="1329000" />
+      <workItem from="1591437605958" duration="715000" />
+      <workItem from="1591499795261" duration="606000" />
+      <workItem from="1592631225228" duration="23170000" />
+      <workItem from="1593779510977" duration="671000" />
+      <workItem from="1593918058205" duration="9042000" />
+      <workItem from="1594519784709" duration="1260000" />
+      <workItem from="1595035262477" duration="6851000" />
+      <workItem from="1595122840014" duration="6250000" />
+      <workItem from="1598659718831" duration="2303000" />
+      <workItem from="1602160438364" duration="676000" />
+      <workItem from="1602586996273" duration="11000" />
+      <workItem from="1602651039398" duration="16000" />
+      <workItem from="1602949031213" duration="1172000" />
+      <workItem from="1602990942980" duration="14805000" />
+      <workItem from="1603022817599" duration="270000" />
+      <workItem from="1603454074417" duration="2632000" />
+      <workItem from="1603466100950" duration="25413000" />
+      <workItem from="1603619196261" duration="2678000" />
+      <workItem from="1603711090173" duration="2933000" />
+      <workItem from="1603798253477" duration="2019000" />
+      <workItem from="1603883518137" duration="3106000" />
+      <workItem from="1603968551374" duration="6511000" />
+      <workItem from="1604120990905" duration="6455000" />
+      <workItem from="1606022251963" duration="796000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

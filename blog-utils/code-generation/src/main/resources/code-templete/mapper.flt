@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper 
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="${packagePath}.dao.auto.${item.schemaName}.${item.modelName}Dao">
+
+	<resultMap type="${packagePath}.bo.auto.${item.schemaName}.${item.modelName}" id="${item.modelName}Result">
+		<result property="id" column="id" jdbcType="INTEGER"/>
+		<#list proList as column>
+        <result property="${column.modelName}" column="${column.columnName}" jdbcType="${column.columnType}"/>
+		</#list>
+	</resultMap>
+	
+	<sql id="Base_Column_List">
+		id,
+    	<trim prefix="" suffix="" suffixOverrides=",">
+	     	<#list proList as column>
+	     		"${column.columnName}",
+	    	</#list>
+    	</trim>
+    </sql>
+    
+    <sql id="selectCondition">
+	    <#list proList as column>
+    	<#if (column.columnName) == "gmt_modified">
+    		<if test="gmtModifiedStart != null "> and "gmt_modified" >= #${r"{"}gmtModifiedStart}::timestamp </if>
+    		<if test="gmtModifiedEnd != null "> and "gmt_modified" &lt; #${r"{"}gmtModifiedEnd}::timestamp </if>
+    	<#else>
+    		<if test="${column.modelName} != null ">
+				and ${column.columnName} = #${r"{"}${column.modelName}}
+			</if>
+    	</#if>
+		</#list>
+	</sql>
+    
+	<!-- 根据ID查询${item.modelName} -->
+	<select id="findById" parameterType="java.lang.Integer"	resultMap="${item.modelName}Result">
+		SELECT 
+		<include refid="Base_Column_List" />
+		FROM ${item.tableName} WHERE id = ${r"#{"}id}
+	</select>
+	
+	<!-- 根据ID删除 -->
+	<select id="deleteById" parameterType="java.lang.Integer">
+		DELETE 
+		FROM ${item.tableName} WHERE id = ${r"#{"}id}
+	</select>
+	
+	<!--保存 -->
+    <insert id="save" useGeneratedKeys="true" keyProperty="id" keyColumn="id" parameterType="${packagePath}.bo.auto.${item.schemaName}.${item.modelName}">
+        insert into ${item.tableName}
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+        	<#list proList as column>
+        		<#if (column.columnName) == "gmt_create" || (column.columnName) == "gmt_modified">
+        			"${column.columnName}",
+	            <#else>
+	        		<if test="${column.modelName} != null">
+	                	"${column.columnName}",
+	            	</if>
+	            </#if>
+        	</#list>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+        	<#list proList as column>
+        		<#if (column.columnName) == "gmt_create" || (column.columnName) == "gmt_modified">
+        			now(),
+        		<#else>
+        			<if test="${column.modelName} != null">
+	        			${r"#{"}${column.modelName}, jdbcType=${column.columnType}},
+	            	</if>
+        		</#if>
+        	</#list>
+        </trim>
+    </insert>
+    
+    <!--保存 (包含主键)-->
+    <insert id="saveAll" parameterType="${packagePath}.bo.auto.${item.schemaName}.${item.modelName}">
+        insert into ${item.tableName}
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+        	"id",
+        	<#list proList as column>
+        		<#if (column.columnName) == "gmt_create" || (column.columnName) == "gmt_modified">
+        			"${column.columnName}",
+	            <#else>
+	        		<if test="${column.modelName} != null">
+	                	"${column.columnName}",
+	            	</if>
+	            </#if>
+        	</#list>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+        	${r"#{"}id, jdbcType=INTEGER},
+        	<#list proList as column>
+        		<#if (column.columnName) == "gmt_create" || (column.columnName) == "gmt_modified">
+        			<choose>
+					    <when test="${column.modelName} != null">
+					        ${r"#{"}${column.modelName}, jdbcType=${column.columnType}},
+					    </when>
+					    <otherwise>
+					        now(),
+					    </otherwise>
+					</choose>
+        		<#else>
+        			<if test="${column.modelName} != null">
+	        			${r"#{"}${column.modelName}, jdbcType=${column.columnType}},
+	            	</if>
+        		</#if>
+        	</#list>
+        </trim>
+    </insert>
+    
+    <!--修改 -->
+    <update id="update" parameterType="${packagePath}.bo.auto.${item.schemaName}.${item.modelName}">
+        update ${item.tableName}
+        <set>
+        	<#list proList as column>
+        		<#if (column.columnName) == "gmt_modified">
+        			"${column.columnName}" = now(),
+        		<#elseif (column.columnName) == "gmt_create">
+	            <#else>
+	                <if test="${column.modelName} != null">
+                        "${column.columnName}" = ${r"#{"}${column.modelName}, jdbcType=${column.columnType}},
+                    </if>
+        		</#if>
+        	</#list>
+        </set>
+        where 
+			id = ${r"#{"}id}
+    </update>
+    
+    <!-- 分页查询${item.modelName} -->
+	<select id="findByPage" parameterType="${packagePath}.bo.auto.${item.schemaName}.${item.modelName}"	resultMap="${item.modelName}Result">
+		SELECT 
+			<include refid="Base_Column_List" />
+		FROM ${item.tableName} 
+		<where>
+			<include refid="selectCondition" />
+		</where> 
+		<#if (item.isOrderBySeqNum)>ORDER BY seq_num asc 
+		<#elseif (item.isShowGmtModified)>ORDER BY "gmt_modified" desc
+		<#else>ORDER BY id asc
+		</#if>
+	</select>
+	
+	<!--批量保存 -->
+    <insert id="batchSave" useGeneratedKeys="true" keyProperty="id" keyColumn="id" parameterType="java.util.List">
+        insert into ${item.tableName} 
+        	<trim prefix="(" suffix=")" suffixOverrides=",">
+	        	<#list proList as column>
+	        		<#if (column.columnName) != "status">
+	        			"${column.columnName}",
+	        		</#if>
+	        	</#list>
+        	</trim>
+        values
+        	<foreach collection="list" item="it" separator=",">
+        		<trim prefix="(" suffix=")" suffixOverrides=",">
+	    			<#list proList as column>
+	    				<#if (column.columnName) == "gmt_create" || (column.columnName) == "gmt_modified">
+		        			now(),
+		        		<#elseif (column.columnName) != "status">
+	        				${r"#{it."}${column.modelName}, jdbcType=${column.columnType}},
+	        			</#if>
+	        		</#list>
+	        	</trim>
+        	</foreach>
+    </insert>
+    
+    <!--批量保存(包含主键) -->
+    <insert id="batchSaveAll" parameterType="java.util.List">
+        insert into ${item.tableName} 
+        	<trim prefix="(" suffix=")" suffixOverrides=",">
+        		"id",
+	        	<#list proList as column>
+	        		"${column.columnName}",
+	        	</#list>
+        	</trim>
+        values
+        	<foreach collection="list" item="it" separator=",">
+        		<trim prefix="(" suffix=")" suffixOverrides=",">
+        			${r"#{it."}id, jdbcType=INTEGER},
+	    			<#list proList as column>
+	    				${r"#{it."}${column.modelName}, jdbcType=${column.columnType}},
+	        		</#list>
+	        	</trim>
+        	</foreach>
+    </insert>
+	
+	
+	<!-- 批量删除 -->
+	<delete id="batchDelete" parameterType="java.util.List">
+        delete from ${item.tableName} where id in 
+	        <foreach collection="ids" item="id" separator="," open="(" close=")">
+	            ${r"#{id"}}
+	        </foreach>
+	</delete>
+</mapper>		

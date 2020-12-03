@@ -1,0 +1,36 @@
+server:
+  port: 8090
+  servlet:
+    context-path: /blog
+  tomcat:
+    uri-encoding: UTF-8
+    max-connections: 200
+    max-threads: 300
+    accept-count: 100
+
+mybatis:
+  mapper-locations: classpath*:/mybatis/*Mapper.xml
+  type-aliases-package: cn.panghu.blog.base.pojo
+
+spring:
+  profiles:
+    active: dev
+  application:
+    name: blog
+
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
+
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql
+
+info:
+  name: ${spring.application.name}
+  description: 个人博客
+  environment: ${spring.profiles.active}
+  version: 1.0.0

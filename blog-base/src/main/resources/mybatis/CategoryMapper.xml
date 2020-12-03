@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper 
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.panghu.blog.base.dao.CategoryDao">
+
+	<resultMap type="cn.panghu.blog.base.pojo.Category" id="CategoryResult">
+		<result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="parentId" column="parent_id" jdbcType="INTEGER"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="description" column="description" jdbcType="VARCHAR"/>
+        <result property="thumbnail" column="thumbnail" jdbcType="VARCHAR"/>
+	</resultMap>
+	
+	<sql id="Base_Column_List">
+		id,
+    	<trim prefix="" suffix="" suffixOverrides=",">
+	     		name,
+	     		parent_id,
+	     		create_time,
+	     		update_time,
+	     		description,
+	     		thumbnail,
+    	</trim>
+    </sql>
+    
+    <sql id="selectCondition">
+    		<if test="name != null ">
+				and name = #{name}
+			</if>
+    		<if test="parentId != null ">
+				and parent_id = #{parentId}
+			</if>
+    		<if test="createTime != null ">
+				and create_time = #{createTime}
+			</if>
+    		<if test="updateTime != null ">
+				and update_time = #{updateTime}
+			</if>
+    		<if test="description != null ">
+				and description = #{description}
+			</if>
+    		<if test="thumbnail != null ">
+				and thumbnail = #{thumbnail}
+			</if>
+	</sql>
+    
+	<!-- 根据ID查询Category -->
+	<select id="findById" parameterType="java.lang.Integer"	resultMap="CategoryResult">
+		SELECT 
+		<include refid="Base_Column_List" />
+		FROM tb_category WHERE id = #{id}
+	</select>
+	
+	<!-- 根据ID删除 -->
+	<select id="deleteById" parameterType="java.lang.Integer">
+		DELETE 
+		FROM tb_category WHERE id = #{id}
+	</select>
+	
+	<!--保存 -->
+    <insert id="save" useGeneratedKeys="true" keyProperty="id" keyColumn="id" parameterType="cn.panghu.blog.base.pojo.Category">
+        insert into tb_category
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+	        		<if test="name != null">
+	                	name,
+	            	</if>
+	        		<if test="parentId != null">
+	                	parent_id,
+	            	</if>
+	        		<if test="createTime != null">
+	                	create_time,
+	            	</if>
+	        		<if test="updateTime != null">
+	                	update_time,
+	            	</if>
+	        		<if test="description != null">
+	                	description,
+	            	</if>
+	        		<if test="thumbnail != null">
+	                	thumbnail,
+	            	</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+        			<if test="name != null">
+	        			#{name, jdbcType=VARCHAR},
+	            	</if>
+        			<if test="parentId != null">
+	        			#{parentId, jdbcType=INTEGER},
+	            	</if>
+        			<if test="createTime != null">
+	        			#{createTime, jdbcType=TIMESTAMP},
+	            	</if>
+        			<if test="updateTime != null">
+	        			#{updateTime, jdbcType=TIMESTAMP},
+	            	</if>
+        			<if test="description != null">
+	        			#{description, jdbcType=VARCHAR},
+	            	</if>
+        			<if test="thumbnail != null">
+	        			#{thumbnail, jdbcType=VARCHAR},
+	            	</if>
+        </trim>
+    </insert>
+    
+    <!--保存 (包含主键)-->
+    <insert id="saveAll" parameterType="cn.panghu.blog.base.pojo.Category">
+        insert into tb_category
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+        	"id",
+	        		<if test="name != null">
+	                	name,
+	            	</if>
+	        		<if test="parentId != null">
+	                	parent_id,
+	            	</if>
+	        		<if test="createTime != null">
+	                	create_time,
+	            	</if>
+	        		<if test="updateTime != null">
+	                	update_time,
+	            	</if>
+	        		<if test="description != null">
+	                	description,
+	            	</if>
+	        		<if test="thumbnail != null">
+	                	thumbnail,
+	            	</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+        	#{id, jdbcType=INTEGER},
+        			<if test="name != null">
+	        			#{name, jdbcType=VARCHAR},
+	            	</if>
+        			<if test="parentId != null">
+	        			#{parentId, jdbcType=INTEGER},
+	            	</if>
+        			<if test="createTime != null">
+	        			#{createTime, jdbcType=TIMESTAMP},
+	            	</if>
+        			<if test="updateTime != null">
+	        			#{updateTime, jdbcType=TIMESTAMP},
+	            	</if>
+        			<if test="description != null">
+	        			#{description, jdbcType=VARCHAR},
+	            	</if>
+        			<if test="thumbnail != null">
+	        			#{thumbnail, jdbcType=VARCHAR},
+	            	</if>
+        </trim>
+    </insert>
+    
+    <!--修改 -->
+    <update id="update" parameterType="cn.panghu.blog.base.pojo.Category">
+        update tb_category
+        <set>
+	                <if test="name != null">
+                        name = #{name, jdbcType=VARCHAR},
+                    </if>
+	                <if test="parentId != null">
+                        parent_id = #{parentId, jdbcType=INTEGER},
+                    </if>
+	                <if test="createTime != null">
+                        create_time = #{createTime, jdbcType=TIMESTAMP},
+                    </if>
+	                <if test="updateTime != null">
+                        update_time = #{updateTime, jdbcType=TIMESTAMP},
+                    </if>
+	                <if test="description != null">
+                        description = #{description, jdbcType=VARCHAR},
+                    </if>
+	                <if test="thumbnail != null">
+                        thumbnail = #{thumbnail, jdbcType=VARCHAR},
+                    </if>
+        </set>
+        where 
+			id = #{id}
+    </update>
+    
+    <!-- 分页查询Category -->
+	<select id="findByPage" parameterType="cn.panghu.blog.base.pojo.Category" resultMap="CategoryResult">
+		SELECT 
+			<include refid="Base_Column_List" />
+		FROM tb_category 
+		<where>
+			<include refid="selectCondition" />
+		</where> 
+		ORDER BY id asc
+	</select>
+	
+	<!--批量保存 -->
+    <insert id="batchSave" useGeneratedKeys="true" keyProperty="id" keyColumn="id" parameterType="java.util.List">
+        insert into tb_category 
+        	<trim prefix="(" suffix=")" suffixOverrides=",">
+	        			name,
+	        			parent_id,
+	        			create_time,
+	        			update_time,
+	        			description,
+	        			thumbnail,
+        	</trim>
+        values
+        	<foreach collection="list" item="it" separator=",">
+        		<trim prefix="(" suffix=")" suffixOverrides=",">
+	        				#{it.name, jdbcType=VARCHAR},
+	        				#{it.parentId, jdbcType=INTEGER},
+	        				#{it.createTime, jdbcType=TIMESTAMP},
+	        				#{it.updateTime, jdbcType=TIMESTAMP},
+	        				#{it.description, jdbcType=VARCHAR},
+	        				#{it.thumbnail, jdbcType=VARCHAR},
+	        	</trim>
+        	</foreach>
+    </insert>
+    
+    <!--批量保存(包含主键) -->
+    <insert id="batchSaveAll" parameterType="java.util.List">
+        insert into tb_category 
+        	<trim prefix="(" suffix=")" suffixOverrides=",">
+        		id,
+	        		name,
+	        		parent_id,
+	        		create_time,
+	        		update_time,
+	        		description,
+	        		thumbnail,
+        	</trim>
+        values
+        	<foreach collection="list" item="it" separator=",">
+        		<trim prefix="(" suffix=")" suffixOverrides=",">
+        			#{it.id, jdbcType=INTEGER},
+	    				#{it.name, jdbcType=VARCHAR},
+	    				#{it.parentId, jdbcType=INTEGER},
+	    				#{it.createTime, jdbcType=TIMESTAMP},
+	    				#{it.updateTime, jdbcType=TIMESTAMP},
+	    				#{it.description, jdbcType=VARCHAR},
+	    				#{it.thumbnail, jdbcType=VARCHAR},
+	        	</trim>
+        	</foreach>
+    </insert>
+	
+	
+	<!-- 批量删除 -->
+	<delete id="batchDelete" parameterType="java.util.List">
+        delete from tb_category where id in 
+	        <foreach collection="ids" item="id" separator="," open="(" close=")">
+	            #{id}
+	        </foreach>
+	</delete>
+</mapper>		

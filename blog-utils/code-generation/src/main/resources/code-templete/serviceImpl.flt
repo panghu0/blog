@@ -1,0 +1,73 @@
+package ${packagePath}.service.auto.${item.schemaName};
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import ${packagePath}.dao.auto.${item.schemaName}.${item.modelName}Dao;
+import ${packagePath}.bo.auto.${item.schemaName}.${item.modelName};
+import ${packagePath}.service.auto.${item.schemaName}.${item.modelName}Service;
+import java.util.List;
+
+/**
+ *${item.tableComment}
+ */
+@Service("${modelParam}Service")
+public class ${item.modelName}ServiceImpl implements ${item.modelName}Service {
+
+	@Autowired
+	private ${item.modelName}Dao ${modelParam}Dao;
+
+	@Override
+	public void save(${item.modelName} ${item.modelName?uncap_first}) {
+		
+		${modelParam}Dao.save(${item.modelName?uncap_first});
+	}
+	
+	@Override
+	public void saveAll(${item.modelName} ${item.modelName?uncap_first}) {
+		
+		${modelParam}Dao.saveAll(${item.modelName?uncap_first});
+	}
+	
+	@Override
+	public void batchSave(List<${item.modelName}> ${item.modelName}s) {
+		
+		${modelParam}Dao.batchSave(${item.modelName}s);
+	}
+	
+	@Override
+	public void batchSaveAll(List<${item.modelName}> ${item.modelName}s) {
+		
+		${modelParam}Dao.batchSaveAll(${item.modelName}s);
+	}
+	
+	@Override
+	public void deleteById(Integer id) {
+		
+		${modelParam}Dao.deleteById(id);
+	}
+	
+	@Override
+	public void update(${item.modelName} ${item.modelName?uncap_first}) {
+		
+		${modelParam}Dao.update(${item.modelName?uncap_first});
+	}
+	
+	@Override
+	public ${item.modelName} findById(Integer id) {
+		
+		return ${modelParam}Dao.findById(id);
+	}
+	
+	@Override
+	public List<${item.modelName}> findByPage(${item.modelName} ${item.modelName?uncap_first}) {
+		
+		return ${modelParam}Dao.findByPage(${item.modelName?uncap_first});
+	}
+	
+	@Override
+	public void batchDelete(List<Integer> ids) {
+	
+		${modelParam}Dao.batchDelete(ids);
+	}
+
+}

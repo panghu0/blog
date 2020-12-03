@@ -1,0 +1,74 @@
+package ${packagePath}.dao.auto.${item.schemaName};
+
+import ${packagePath}.bo.auto.${item.schemaName}.${item.modelName};
+import java.util.List;
+import org.apache.ibatis.annotations.Param;
+/**
+ * ${item.modelName}Dao接口
+ */
+public interface ${item.modelName}Dao {
+
+	/**
+	 * insert
+	 * @param ${item.modelName} ${item.modelName?uncap_first}
+	 * @return
+	 */
+	public void save(${item.modelName} ${item.modelName?uncap_first});
+	
+	/**
+	 * insert include id
+	 * @param ${item.modelName} ${item.modelName?uncap_first}
+	 * @return
+	 */
+	public void saveAll(${item.modelName} ${item.modelName?uncap_first});
+	
+	/**
+	 * 根据ID删除${item.modelName}
+	 * @param Integer id
+	 * @return 
+	 */
+	public void deleteById(@Param("id") Integer id);
+	
+	/**
+	 * 更新
+	 * @param ${item.modelName} ${item.modelName?uncap_first}
+	 * @return
+	 */
+	public void update(${item.modelName} ${item.modelName?uncap_first});
+	
+	/**
+	 * 根据ID查询${item.modelName}
+	 * @param Integer id
+	 * @return
+	 */
+	public ${item.modelName} findById(@Param("id") Integer id);
+	
+	/**
+	 * 批量添加
+	 * @param List<${item.modelName}> ${item.modelName?uncap_first}s
+	 * @return 
+	 */
+	public void batchSave(@Param("list") List<${item.modelName}> list);
+	
+	/**
+	 * 批量添加(包含主键)
+	 * @param List<${item.modelName}> ${item.modelName?uncap_first}s
+	 * @return 
+	 */
+	public void batchSaveAll(@Param("list") List<${item.modelName}> list);
+	
+	/**
+	 * 根据${item.modelName}某个属性来查询
+	 * @param List<${item.modelName}> ${item.modelName?uncap_first}s
+	 * return List<${item.modelName}>
+	 */
+	public List<${item.modelName}> findByPage(${item.modelName} ${item.modelName?uncap_first});
+	
+	/**
+	 * 批量删除
+	 * @param List<Integer> ids
+	 * return 
+	 */
+	public void batchDelete(@Param("ids") List<Integer> ids);
+	
+}

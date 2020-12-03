@@ -1,0 +1,58 @@
+package ${packagePath}.service.auto.${item.schemaName};
+
+import ${packagePath}.bo.auto.${item.schemaName}.${item.modelName};
+import java.util.List;
+
+/**
+ *${item.tableComment}
+ */
+public interface ${item.modelName}Service {
+
+	/**
+	 * 新增
+	 */
+	void save(${item.modelName} ${item.modelName?uncap_first});
+	
+	/**
+	 * 新增包含主键
+	 */
+	void saveAll(${item.modelName} ${item.modelName?uncap_first});
+	
+	/**
+	 * 新增
+	 * 注意数量不要太大，特别是数据迁移时不要使用该方法
+	 */
+	void batchSave(List<${item.modelName}> ${item.modelName}s);
+	
+	/**
+	 * 新增
+	 * 注意数量不要太大，针对数据迁移提供的方法(包含主键)
+	 */
+	void batchSaveAll(List<${item.modelName}> ${item.modelName}s);
+	
+	/**
+	 * 根据ID删除
+	 */
+	void deleteById(Integer id);
+	
+	/**
+	 * 更新
+	 */
+	void update(${item.modelName} ${item.modelName?uncap_first});
+	
+	/**
+	 * 根据ID查找对象
+	 */
+	${item.modelName} findById(Integer id);
+	
+	/**
+	 * 根据对象中任意属性来查询
+	 */
+	List<${item.modelName}> findByPage(${item.modelName} ${item.modelName?uncap_first});
+	
+	/**
+	 * 批量删除
+	 * @param List<Integer> ids
+	 */
+	void batchDelete(List<Integer> ids);
+}

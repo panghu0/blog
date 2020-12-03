@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.panghu.blog.dao.PhotoExpDao">
+
+    <!-- 根据文章ID和类型查询Photo -->
+    <select id="findByArticleAndType" resultType="cn.panghu.blog.base.pojo.Photo">
+        SELECT tp.*
+        FROM tb_article_photo tap
+        LEFT JOIN tb_photo tp ON tap.photo_id = tp.id
+        WHERE tap.article_id = #{articleId} and tp.type = #{type}
+    </select>
+
+    <!-- 根据文章id删除图片文章关联 -->
+    <delete id="deleteRelByArticle" parameterType="java.lang.Integer">
+        delete from tb_article_photo where article_id = #{articleId}
+    </delete>
+
+    <!-- 根据图片id批量删除图片文章关联 -->
+    <delete id="batchDelete" parameterType="java.util.List">
+        delete from tb_article_photo where photo_id in
+        <foreach collection="ids" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper 
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhongrui.codegeneration.dao.GeneratorHelperDao">
+
+	<!-- 查询该数据库下所有的schema -->
+	<select id="findAllDatabaseSchemas" resultType="java.lang.String">
+		SELECT
+			schema_name
+		FROM
+			information_schema.schemata
+	</select>
+	
+	<!-- 查询该schema下的所有表 -->
+	<select id="findAllTablesFromSchema" parameterType="java.lang.String" resultType="java.lang.String">
+		SELECT
+			tablename
+		FROM
+			pg_tables
+		WHERE
+			schemaname = #{ schemaName }
+	</select>
+	
+	<!-- 查询表的基本信息 -->
+	<select id="findTableInfo" parameterType="java.lang.String" resultType="com.zhongrui.codegeneration.vo.TableInfo">
+		SELECT
+			relname AS tableName,
+			CAST (
+				obj_description (relfilenode, 'pg_class') AS VARCHAR
+			) AS tableComment
+		FROM
+			pg_class C
+		WHERE
+			relname = #{ tableName }
+	</select>
+	
+	
+	<!-- 查询表的所有字段 -->
+	<select id="listColumInfos" parameterType="java.lang.String" resultType="com.zhongrui.codegeneration.vo.ColumnInfo">
+		SELECT
+			a.attnum AS attnum,
+			a.attname AS columnName,
+			t.typname AS columnType,
+			a.attlen AS columnLength,
+			a.atttypmod AS columnVarLength,
+			a.attnotnull AS isNotNull,
+			b.description AS columnComment
+		FROM
+			pg_class c,
+			pg_attribute a
+		LEFT OUTER JOIN pg_description b ON a.attrelid = b.objoid
+		AND a.attnum = b.objsubid,
+		 pg_type t
+		WHERE
+			c.relname = #{ tableName }
+		AND a.attnum > 0
+		AND a.attrelid = c.oid
+		AND a.atttypid = t.oid
+		ORDER BY
+			a.attnum
+	</select>
+</mapper>		

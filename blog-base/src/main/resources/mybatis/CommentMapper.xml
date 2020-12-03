@@ -1,0 +1,441 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper 
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhongrui.dao.auto.blog.CommentDao">
+
+	<resultMap type="cn.panghu.blog.base.pojo.Comment" id="CommentResult">
+		<result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="allowNotification" column="allow_notification" jdbcType="INTEGER"/>
+        <result property="author" column="author" jdbcType="VARCHAR"/>
+        <result property="authorUrl" column="author_url" jdbcType="VARCHAR"/>
+        <result property="content" column="content" jdbcType="VARCHAR"/>
+        <result property="email" column="email" jdbcType="VARCHAR"/>
+        <result property="gravatarMd5" column="gravatar_md5" jdbcType="VARCHAR"/>
+        <result property="ipAddress" column="ip_address" jdbcType="VARCHAR"/>
+        <result property="isAdmin" column="is_admin" jdbcType="INTEGER"/>
+        <result property="parentId" column="parent_id" jdbcType="INTEGER"/>
+        <result property="articleId" column="article_id" jdbcType="INTEGER"/>
+        <result property="userAgent" column="user_agent" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="status" column="status" jdbcType="INTEGER"/>
+	</resultMap>
+	
+	<sql id="Base_Column_List">
+		id,
+    	<trim prefix="" suffix="" suffixOverrides=",">
+	     		allow_notification,
+	     		author,
+	     		author_url,
+	     		content,
+	     		email,
+	     		gravatar_md5,
+	     		ip_address,
+	     		is_admin,
+	     		parent_id,
+	     		article_id,
+	     		user_agent,
+	     		create_time,
+	     		update_time,
+	     		status,
+    	</trim>
+    </sql>
+    
+    <sql id="selectCondition">
+    		<if test="allowNotification != null ">
+				and allow_notification = #{allowNotification}
+			</if>
+    		<if test="author != null ">
+				and author = #{author}
+			</if>
+    		<if test="authorUrl != null ">
+				and author_url = #{authorUrl}
+			</if>
+    		<if test="content != null ">
+				and content = #{content}
+			</if>
+    		<if test="email != null ">
+				and email = #{email}
+			</if>
+    		<if test="gravatarMd5 != null ">
+				and gravatar_md5 = #{gravatarMd5}
+			</if>
+    		<if test="ipAddress != null ">
+				and ip_address = #{ipAddress}
+			</if>
+    		<if test="isAdmin != null ">
+				and is_admin = #{isAdmin}
+			</if>
+    		<if test="parentId != null ">
+				and parent_id = #{parentId}
+			</if>
+    		<if test="articleId != null ">
+				and article_id = #{articleId}
+			</if>
+    		<if test="userAgent != null ">
+				and user_agent = #{userAgent}
+			</if>
+    		<if test="createTime != null ">
+				and create_time = #{createTime}
+			</if>
+    		<if test="updateTime != null ">
+				and update_time = #{updateTime}
+			</if>
+    		<if test="status != null ">
+				and status = #{status}
+			</if>
+	</sql>
+    
+	<!-- 根据ID查询Comment -->
+	<select id="findById" parameterType="java.lang.Integer"	resultMap="CommentResult">
+		SELECT 
+		<include refid="Base_Column_List" />
+		FROM tb_comment WHERE id = #{id}
+	</select>
+	
+	<!-- 根据ID删除 -->
+	<select id="deleteById" parameterType="java.lang.Integer">
+		DELETE 
+		FROM tb_comment WHERE id = #{id}
+	</select>
+	
+	<!--保存 -->
+    <insert id="save" useGeneratedKeys="true" keyProperty="id" keyColumn="id" parameterType="cn.panghu.blog.base.pojo.Comment">
+        insert into tb_comment
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+	        		<if test="allowNotification != null">
+	                	allow_notification,
+	            	</if>
+	        		<if test="author != null">
+	                	author,
+	            	</if>
+	        		<if test="authorUrl != null">
+	                	author_url,
+	            	</if>
+	        		<if test="content != null">
+	                	content,
+	            	</if>
+	        		<if test="email != null">
+	                	email,
+	            	</if>
+	        		<if test="gravatarMd5 != null">
+	                	gravatar_md5,
+	            	</if>
+	        		<if test="ipAddress != null">
+	                	ip_address,
+	            	</if>
+	        		<if test="isAdmin != null">
+	                	is_admin,
+	            	</if>
+	        		<if test="parentId != null">
+	                	parent_id,
+	            	</if>
+	        		<if test="articleId != null">
+	                	article_id,
+	            	</if>
+	        		<if test="userAgent != null">
+	                	user_agent,
+	            	</if>
+	        		<if test="createTime != null">
+	                	create_time,
+	            	</if>
+	        		<if test="updateTime != null">
+	                	update_time,
+	            	</if>
+	        		<if test="status != null">
+	                	status,
+	            	</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+        			<if test="allowNotification != null">
+	        			#{allowNotification, jdbcType=INTEGER},
+	            	</if>
+        			<if test="author != null">
+	        			#{author, jdbcType=VARCHAR},
+	            	</if>
+        			<if test="authorUrl != null">
+	        			#{authorUrl, jdbcType=VARCHAR},
+	            	</if>
+        			<if test="content != null">
+	        			#{content, jdbcType=VARCHAR},
+	            	</if>
+        			<if test="email != null">
+	        			#{email, jdbcType=VARCHAR},
+	            	</if>
+        			<if test="gravatarMd5 != null">
+	        			#{gravatarMd5, jdbcType=VARCHAR},
+	            	</if>
+        			<if test="ipAddress != null">
+	        			#{ipAddress, jdbcType=VARCHAR},
+	            	</if>
+        			<if test="isAdmin != null">
+	        			#{isAdmin, jdbcType=INTEGER},
+	            	</if>
+        			<if test="parentId != null">
+	        			#{parentId, jdbcType=INTEGER},
+	            	</if>
+        			<if test="articleId != null">
+	        			#{articleId, jdbcType=INTEGER},
+	            	</if>
+        			<if test="userAgent != null">
+	        			#{userAgent, jdbcType=VARCHAR},
+	            	</if>
+        			<if test="createTime != null">
+	        			#{createTime, jdbcType=TIMESTAMP},
+	            	</if>
+        			<if test="updateTime != null">
+	        			#{updateTime, jdbcType=TIMESTAMP},
+	            	</if>
+        			<if test="status != null">
+	        			#{status, jdbcType=INTEGER},
+	            	</if>
+        </trim>
+    </insert>
+    
+    <!--保存 (包含主键)-->
+    <insert id="saveAll" parameterType="cn.panghu.blog.base.pojo.Comment">
+        insert into tb_comment
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+        	"id",
+	        		<if test="allowNotification != null">
+	                	allow_notification,
+	            	</if>
+	        		<if test="author != null">
+	                	author,
+	            	</if>
+	        		<if test="authorUrl != null">
+	                	author_url,
+	            	</if>
+	        		<if test="content != null">
+	                	content,
+	            	</if>
+	        		<if test="email != null">
+	                	email,
+	            	</if>
+	        		<if test="gravatarMd5 != null">
+	                	gravatar_md5,
+	            	</if>
+	        		<if test="ipAddress != null">
+	                	ip_address,
+	            	</if>
+	        		<if test="isAdmin != null">
+	                	is_admin,
+	            	</if>
+	        		<if test="parentId != null">
+	                	parent_id,
+	            	</if>
+	        		<if test="articleId != null">
+	                	article_id,
+	            	</if>
+	        		<if test="userAgent != null">
+	                	user_agent,
+	            	</if>
+	        		<if test="createTime != null">
+	                	create_time,
+	            	</if>
+	        		<if test="updateTime != null">
+	                	update_time,
+	            	</if>
+	        		<if test="status != null">
+	                	status,
+	            	</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+        	#{id, jdbcType=INTEGER},
+        			<if test="allowNotification != null">
+	        			#{allowNotification, jdbcType=INTEGER},
+	            	</if>
+        			<if test="author != null">
+	        			#{author, jdbcType=VARCHAR},
+	            	</if>
+        			<if test="authorUrl != null">
+	        			#{authorUrl, jdbcType=VARCHAR},
+	            	</if>
+        			<if test="content != null">
+	        			#{content, jdbcType=VARCHAR},
+	            	</if>
+        			<if test="email != null">
+	        			#{email, jdbcType=VARCHAR},
+	            	</if>
+        			<if test="gravatarMd5 != null">
+	        			#{gravatarMd5, jdbcType=VARCHAR},
+	            	</if>
+        			<if test="ipAddress != null">
+	        			#{ipAddress, jdbcType=VARCHAR},
+	            	</if>
+        			<if test="isAdmin != null">
+	        			#{isAdmin, jdbcType=INTEGER},
+	            	</if>
+        			<if test="parentId != null">
+	        			#{parentId, jdbcType=INTEGER},
+	            	</if>
+        			<if test="articleId != null">
+	        			#{articleId, jdbcType=INTEGER},
+	            	</if>
+        			<if test="userAgent != null">
+	        			#{userAgent, jdbcType=VARCHAR},
+	            	</if>
+        			<if test="createTime != null">
+	        			#{createTime, jdbcType=TIMESTAMP},
+	            	</if>
+        			<if test="updateTime != null">
+	        			#{updateTime, jdbcType=TIMESTAMP},
+	            	</if>
+        			<if test="status != null">
+	        			#{status, jdbcType=INTEGER},
+	            	</if>
+        </trim>
+    </insert>
+    
+    <!--修改 -->
+    <update id="update" parameterType="cn.panghu.blog.base.pojo.Comment">
+        update tb_comment
+        <set>
+	                <if test="allowNotification != null">
+                        allow_notification = #{allowNotification, jdbcType=INTEGER},
+                    </if>
+	                <if test="author != null">
+                        author = #{author, jdbcType=VARCHAR},
+                    </if>
+	                <if test="authorUrl != null">
+                        author_url = #{authorUrl, jdbcType=VARCHAR},
+                    </if>
+	                <if test="content != null">
+                        content = #{content, jdbcType=VARCHAR},
+                    </if>
+	                <if test="email != null">
+                        email = #{email, jdbcType=VARCHAR},
+                    </if>
+	                <if test="gravatarMd5 != null">
+                        gravatar_md5 = #{gravatarMd5, jdbcType=VARCHAR},
+                    </if>
+	                <if test="ipAddress != null">
+                        ip_address = #{ipAddress, jdbcType=VARCHAR},
+                    </if>
+	                <if test="isAdmin != null">
+                        is_admin = #{isAdmin, jdbcType=INTEGER},
+                    </if>
+	                <if test="parentId != null">
+                        parent_id = #{parentId, jdbcType=INTEGER},
+                    </if>
+	                <if test="articleId != null">
+                        article_id = #{articleId, jdbcType=INTEGER},
+                    </if>
+	                <if test="userAgent != null">
+                        user_agent = #{userAgent, jdbcType=VARCHAR},
+                    </if>
+	                <if test="createTime != null">
+                        create_time = #{createTime, jdbcType=TIMESTAMP},
+                    </if>
+	                <if test="updateTime != null">
+                        update_time = #{updateTime, jdbcType=TIMESTAMP},
+                    </if>
+	                <if test="status != null">
+                        status = #{status, jdbcType=INTEGER},
+                    </if>
+        </set>
+        where 
+			id = #{id}
+    </update>
+    
+    <!-- 分页查询Comment -->
+	<select id="findByPage" parameterType="cn.panghu.blog.base.pojo.Comment"	resultMap="CommentResult">
+		SELECT 
+			<include refid="Base_Column_List" />
+		FROM tb_comment 
+		<where>
+			<include refid="selectCondition" />
+		</where> 
+		ORDER BY id asc
+	</select>
+	
+	<!--批量保存 -->
+    <insert id="batchSave" useGeneratedKeys="true" keyProperty="id" keyColumn="id" parameterType="java.util.List">
+        insert into tb_comment 
+        	<trim prefix="(" suffix=")" suffixOverrides=",">
+	        			allow_notification,
+	        			author,
+	        			author_url,
+	        			content,
+	        			email,
+	        			gravatar_md5,
+	        			ip_address,
+	        			is_admin,
+	        			parent_id,
+	        			article_id,
+	        			user_agent,
+	        			create_time,
+	        			update_time,
+        	</trim>
+        values
+        	<foreach collection="list" item="it" separator=",">
+        		<trim prefix="(" suffix=")" suffixOverrides=",">
+	        				#{it.allowNotification, jdbcType=INTEGER},
+	        				#{it.author, jdbcType=VARCHAR},
+	        				#{it.authorUrl, jdbcType=VARCHAR},
+	        				#{it.content, jdbcType=VARCHAR},
+	        				#{it.email, jdbcType=VARCHAR},
+	        				#{it.gravatarMd5, jdbcType=VARCHAR},
+	        				#{it.ipAddress, jdbcType=VARCHAR},
+	        				#{it.isAdmin, jdbcType=INTEGER},
+	        				#{it.parentId, jdbcType=INTEGER},
+	        				#{it.articleId, jdbcType=INTEGER},
+	        				#{it.userAgent, jdbcType=VARCHAR},
+	        				#{it.createTime, jdbcType=TIMESTAMP},
+	        				#{it.updateTime, jdbcType=TIMESTAMP},
+	        	</trim>
+        	</foreach>
+    </insert>
+    
+    <!--批量保存(包含主键) -->
+    <insert id="batchSaveAll" parameterType="java.util.List">
+        insert into tb_comment 
+        	<trim prefix="(" suffix=")" suffixOverrides=",">
+        		"id",
+	        		allow_notification,
+	        		author,
+	        		author_url,
+	        		content,
+	        		email,
+	        		gravatar_md5,
+	        		ip_address,
+	        		is_admin,
+	        		parent_id,
+	        		article_id,
+	        		user_agent,
+	        		create_time,
+	        		update_time,
+	        		status,
+        	</trim>
+        values
+        	<foreach collection="list" item="it" separator=",">
+        		<trim prefix="(" suffix=")" suffixOverrides=",">
+        			#{it.id, jdbcType=INTEGER},
+	    				#{it.allowNotification, jdbcType=INTEGER},
+	    				#{it.author, jdbcType=VARCHAR},
+	    				#{it.authorUrl, jdbcType=VARCHAR},
+	    				#{it.content, jdbcType=VARCHAR},
+	    				#{it.email, jdbcType=VARCHAR},
+	    				#{it.gravatarMd5, jdbcType=VARCHAR},
+	    				#{it.ipAddress, jdbcType=VARCHAR},
+	    				#{it.isAdmin, jdbcType=INTEGER},
+	    				#{it.parentId, jdbcType=INTEGER},
+	    				#{it.articleId, jdbcType=INTEGER},
+	    				#{it.userAgent, jdbcType=VARCHAR},
+	    				#{it.createTime, jdbcType=TIMESTAMP},
+	    				#{it.updateTime, jdbcType=TIMESTAMP},
+	    				#{it.status, jdbcType=INTEGER},
+	        	</trim>
+        	</foreach>
+    </insert>
+	
+	
+	<!-- 批量删除 -->
+	<delete id="batchDelete" parameterType="java.util.List">
+        delete from tb_comment where id in 
+	        <foreach collection="ids" item="id" separator="," open="(" close=")">
+	            #{id}
+	        </foreach>
+	</delete>
+</mapper>		

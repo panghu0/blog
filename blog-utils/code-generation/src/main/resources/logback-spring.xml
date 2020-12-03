@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/2002/xmlspec/dtd/2.10/xmlspec.dtd">
+
+<configuration scan="true" scanPeriod="30 seconds">
+	<springProfile name="local">
+		<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+	        <encoder>
+	            <!-- 格式化 -->
+	            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%p] [%t] %c{36} - %m%n</pattern>
+	            <charset>utf-8</charset>
+	        </encoder>
+	        <!--此日志appender是为开发使用，只配置最底级别，控制台输出的日志级别是大于或等于此级别的日志信息-->
+	        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+	            <level>debug</level>
+	        </filter>
+	    </appender>
+    </springProfile>
+    
+	<root level="debug">
+		<appender-ref ref="CONSOLE" />
+	</root>
+	
+</configuration>

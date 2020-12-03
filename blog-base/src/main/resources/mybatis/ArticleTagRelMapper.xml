@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper 
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.panghu.blog.base.dao.ArticleTagRelDao">
+
+	<resultMap type="cn.panghu.blog.base.pojo.ArticleTagRel" id="ArticleTagRelResult">
+		<result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="articleId" column="article_id" jdbcType="INTEGER"/>
+        <result property="tagId" column="tag_id" jdbcType="INTEGER"/>
+	</resultMap>
+	
+	<sql id="Base_Column_List">
+		id,
+    	<trim prefix="" suffix="" suffixOverrides=",">
+	     		article_id,
+	     		tag_id,
+    	</trim>
+    </sql>
+    
+    <sql id="selectCondition">
+    		<if test="articleId != null ">
+				and article_id = #{articleId}
+			</if>
+    		<if test="tagId != null ">
+				and tag_id = #{tagId}
+			</if>
+	</sql>
+    
+	<!-- 根据ID查询ArticleTagRel -->
+	<select id="findById" parameterType="java.lang.Integer"	resultMap="ArticleTagRelResult">
+		SELECT 
+		<include refid="Base_Column_List" />
+		FROM tb_article_tag_rel WHERE id = #{id}
+	</select>
+	
+	<!-- 根据ID删除 -->
+	<select id="deleteById" parameterType="java.lang.Integer">
+		DELETE 
+		FROM tb_article_tag_rel WHERE id = #{id}
+	</select>
+	
+	<!--保存 -->
+    <insert id="save" useGeneratedKeys="true" keyProperty="id" keyColumn="id" parameterType="cn.panghu.blog.base.pojo.ArticleTagRel">
+        insert into tb_article_tag_rel
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+	        		<if test="articleId != null">
+	                	article_id,
+	            	</if>
+	        		<if test="tagId != null">
+	                	tag_id,
+	            	</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+        			<if test="articleId != null">
+	        			#{articleId, jdbcType=INTEGER},
+	            	</if>
+        			<if test="tagId != null">
+	        			#{tagId, jdbcType=INTEGER},
+	            	</if>
+        </trim>
+    </insert>
+    
+    <!--保存 (包含主键)-->
+    <insert id="saveAll" parameterType="cn.panghu.blog.base.pojo.ArticleTagRel">
+        insert into tb_article_tag_rel
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+        	"id",
+	        		<if test="articleId != null">
+	                	article_id,
+	            	</if>
+	        		<if test="tagId != null">
+	                	tag_id,
+	            	</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+        	#{id, jdbcType=INTEGER},
+        			<if test="articleId != null">
+	        			#{articleId, jdbcType=INTEGER},
+	            	</if>
+        			<if test="tagId != null">
+	        			#{tagId, jdbcType=INTEGER},
+	            	</if>
+        </trim>
+    </insert>
+    
+    <!--修改 -->
+    <update id="update" parameterType="cn.panghu.blog.base.pojo.ArticleTagRel">
+        update tb_article_tag_rel
+        <set>
+	                <if test="articleId != null">
+                        article_id = #{articleId, jdbcType=INTEGER},
+                    </if>
+	                <if test="tagId != null">
+                        tag_id = #{tagId, jdbcType=INTEGER},
+                    </if>
+        </set>
+        where 
+			id = #{id}
+    </update>
+    
+    <!-- 分页查询ArticleTagRel -->
+	<select id="findByPage" parameterType="cn.panghu.blog.base.pojo.ArticleTagRel"	resultMap="ArticleTagRelResult">
+		SELECT 
+			<include refid="Base_Column_List" />
+		FROM tb_article_tag_rel 
+		<where>
+			<include refid="selectCondition" />
+		</where> 
+		ORDER BY id asc
+	</select>
+	
+	<!--批量保存 -->
+    <insert id="batchSave" useGeneratedKeys="true" keyProperty="id" keyColumn="id" parameterType="java.util.List">
+        insert into tb_article_tag_rel 
+        	<trim prefix="(" suffix=")" suffixOverrides=",">
+	        			article_id,
+	        			tag_id,
+        	</trim>
+        values
+        	<foreach collection="list" item="it" separator=",">
+        		<trim prefix="(" suffix=")" suffixOverrides=",">
+	        				#{it.articleId, jdbcType=INTEGER},
+	        				#{it.tagId, jdbcType=INTEGER},
+	        	</trim>
+        	</foreach>
+    </insert>
+    
+    <!--批量保存(包含主键) -->
+    <insert id="batchSaveAll" parameterType="java.util.List">
+        insert into tb_article_tag_rel 
+        	<trim prefix="(" suffix=")" suffixOverrides=",">
+        		"id",
+	        		article_id,
+	        		tag_id,
+        	</trim>
+        values
+        	<foreach collection="list" item="it" separator=",">
+        		<trim prefix="(" suffix=")" suffixOverrides=",">
+        			#{it.id, jdbcType=INTEGER},
+	    				#{it.articleId, jdbcType=INTEGER},
+	    				#{it.tagId, jdbcType=INTEGER},
+	        	</trim>
+        	</foreach>
+    </insert>
+	
+	
+	<!-- 批量删除 -->
+	<delete id="batchDelete" parameterType="java.util.List">
+        delete from tb_article_tag_rel where id in 
+	        <foreach collection="ids" item="id" separator="," open="(" close=")">
+	            #{id}
+	        </foreach>
+	</delete>
+</mapper>		

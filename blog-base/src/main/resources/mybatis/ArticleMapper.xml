@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper 
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.panghu.blog.base.dao.ArticleDao">
+
+	<resultMap type="cn.panghu.blog.base.pojo.Article" id="ArticleResult">
+		<result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="title" column="title" jdbcType="VARCHAR"/>
+        <result property="categoryId" column="category_id" jdbcType="INTEGER"/>
+        <result property="disallowComment" column="disallow_comment" jdbcType="INTEGER"/>
+        <result property="originalContent" column="original_content" jdbcType="VARCHAR"/>
+        <result property="formatContent" column="format_content" jdbcType="VARCHAR"/>
+        <result property="metaKeywords" column="meta_keywords" jdbcType="VARCHAR"/>
+        <result property="password" column="password" jdbcType="VARCHAR"/>
+        <result property="summary" column="summary" jdbcType="VARCHAR"/>
+        <result property="topPriority" column="top_priority" jdbcType="INTEGER"/>
+        <result property="photoId" column="photo_id" jdbcType="INTEGER"/>
+        <result property="likes" column="likes" jdbcType="INTEGER"/>
+        <result property="visits" column="visits" jdbcType="INTEGER"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="status" column="status" jdbcType="INTEGER"/>
+	</resultMap>
+	
+	<sql id="Base_Column_List">
+		id,
+    	<trim prefix="" suffix="" suffixOverrides=",">
+	     		title,
+	     		category_id,
+	     		disallow_comment,
+	     		original_content,
+	     		format_content,
+	     		meta_keywords,
+	     		password,
+	     		summary,
+	     		top_priority,
+	     		photo_id,
+	     		likes,
+	     		visits,
+	     		create_time,
+	     		update_time,
+	     		status,
+    	</trim>
+    </sql>
+    
+    <sql id="selectCondition">
+    		<if test="title != null ">
+				and title = #{title}
+			</if>
+    		<if test="categoryId != null ">
+				and category_id = #{categoryId}
+			</if>
+    		<if test="disallowComment != null ">
+				and disallow_comment = #{disallowComment}
+			</if>
+    		<if test="originalContent != null ">
+				and original_content = #{originalContent}
+			</if>
+    		<if test="formatContent != null ">
+				and format_content = #{formatContent}
+			</if>
+    		<if test="metaKeywords != null ">
+				and meta_keywords = #{metaKeywords}
+			</if>
+    		<if test="password != null ">
+				and password = #{password}
+			</if>
+    		<if test="summary != null ">
+				and summary = #{summary}
+			</if>
+    		<if test="topPriority != null ">
+				and top_priority = #{topPriority}
+			</if>
+    		<if test="photoId != null ">
+				and photo_id = #{photoId}
+			</if>
+    		<if test="likes != null ">
+				and likes = #{likes}
+			</if>
+    		<if test="visits != null ">
+				and visits = #{visits}
+			</if>
+    		<if test="createTime != null ">
+				and create_time = #{createTime}
+			</if>
+    		<if test="updateTime != null ">
+				and update_time = #{updateTime}
+			</if>
+    		<if test="status != null ">
+				and status = #{status}
+			</if>
+	</sql>
+    
+	<!-- 根据ID查询Article -->
+	<select id="findById" parameterType="java.lang.Integer"	resultMap="ArticleResult">
+		SELECT 
+		<include refid="Base_Column_List" />
+		FROM tb_article WHERE id = #{id}
+	</select>
+	
+	<!-- 根据ID删除 -->
+	<select id="deleteById" parameterType="java.lang.Integer">
+		DELETE 
+		FROM tb_article WHERE id = #{id}
+	</select>
+	
+	<!--保存 -->
+    <insert id="save" useGeneratedKeys="true" keyProperty="id" keyColumn="id" parameterType="cn.panghu.blog.base.pojo.Article">
+        insert into tb_article
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+	        		<if test="title != null">
+	                	title,
+	            	</if>
+	        		<if test="categoryId != null">
+	                	category_id,
+	            	</if>
+	        		<if test="disallowComment != null">
+	                	disallow_comment,
+	            	</if>
+	        		<if test="originalContent != null">
+	                	original_content,
+	            	</if>
+	        		<if test="formatContent != null">
+	                	format_content,
+	            	</if>
+	        		<if test="metaKeywords != null">
+	                	meta_keywords,
+	            	</if>
+	        		<if test="password != null">
+	                	password,
+	            	</if>
+	        		<if test="summary != null">
+	                	summary,
+	            	</if>
+	        		<if test="topPriority != null">
+	                	top_priority,
+	            	</if>
+	        		<if test="photoId != null">
+	                	photo_id,
+	            	</if>
+	        		<if test="likes != null">
+	                	likes,
+	            	</if>
+	        		<if test="visits != null">
+	                	visits,
+	            	</if>
+	        		<if test="createTime != null">
+	                	create_time,
+	            	</if>
+	        		<if test="updateTime != null">
+	                	update_time,
+	            	</if>
+	        		<if test="status != null">
+	                	status,
+	            	</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+        			<if test="title != null">
+	        			#{title, jdbcType=VARCHAR},
+	            	</if>
+        			<if test="categoryId != null">
+	        			#{categoryId, jdbcType=INTEGER},
+	            	</if>
+        			<if test="disallowComment != null">
+	        			#{disallowComment, jdbcType=INTEGER},
+	            	</if>
+        			<if test="originalContent != null">
+	        			#{originalContent, jdbcType=VARCHAR},
+	            	</if>
+        			<if test="formatContent != null">
+	        			#{formatContent, jdbcType=VARCHAR},
+	            	</if>
+        			<if test="metaKeywords != null">
+	        			#{metaKeywords, jdbcType=VARCHAR},
+	            	</if>
+        			<if test="password != null">
+	        			#{password, jdbcType=VARCHAR},
+	            	</if>
+        			<if test="summary != null">
+	        			#{summary, jdbcType=VARCHAR},
+	            	</if>
+        			<if test="topPriority != null">
+	        			#{topPriority, jdbcType=INTEGER},
+	            	</if>
+        			<if test="photoId != null">
+	        			#{photoId, jdbcType=INTEGER},
+	            	</if>
+        			<if test="likes != null">
+	        			#{likes, jdbcType=INTEGER},
+	            	</if>
+        			<if test="visits != null">
+	        			#{visits, jdbcType=INTEGER},
+	            	</if>
+        			<if test="createTime != null">
+	        			#{createTime, jdbcType=TIMESTAMP},
+	            	</if>
+        			<if test="updateTime != null">
+	        			#{updateTime, jdbcType=TIMESTAMP},
+	            	</if>
+        			<if test="status != null">
+	        			#{status, jdbcType=INTEGER},
+	            	</if>
+        </trim>
+    </insert>
+    
+    <!--保存 (包含主键)-->
+    <insert id="saveAll" parameterType="cn.panghu.blog.base.pojo.Article">
+        insert into tb_article
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+        	"id",
+	        		<if test="title != null">
+	                	title,
+	            	</if>
+	        		<if test="categoryId != null">
+	                	category_id,
+	            	</if>
+	        		<if test="disallowComment != null">
+	                	disallow_comment,
+	            	</if>
+	        		<if test="originalContent != null">
+	                	original_content,
+	            	</if>
+	        		<if test="formatContent != null">
+	                	format_content,
+	            	</if>
+	        		<if test="metaKeywords != null">
+	                	meta_keywords,
+	            	</if>
+	        		<if test="password != null">
+	                	password,
+	            	</if>
+	        		<if test="summary != null">
+	                	summary,
+	            	</if>
+	        		<if test="topPriority != null">
+	                	top_priority,
+	            	</if>
+	        		<if test="photoId != null">
+	                	photo_id,
+	            	</if>
+	        		<if test="likes != null">
+	                	likes,
+	            	</if>
+	        		<if test="visits != null">
+	                	visits,
+	            	</if>
+	        		<if test="createTime != null">
+	                	create_time,
+	            	</if>
+	        		<if test="updateTime != null">
+	                	update_time,
+	            	</if>
+	        		<if test="status != null">
+	                	status,
+	            	</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+        	#{id, jdbcType=INTEGER},
+        			<if test="title != null">
+	        			#{title, jdbcType=VARCHAR},
+	            	</if>
+        			<if test="categoryId != null">
+	        			#{categoryId, jdbcType=INTEGER},
+	            	</if>
+        			<if test="disallowComment != null">
+	        			#{disallowComment, jdbcType=INTEGER},
+	            	</if>
+        			<if test="originalContent != null">
+	        			#{originalContent, jdbcType=VARCHAR},
+	            	</if>
+        			<if test="formatContent != null">
+	        			#{formatContent, jdbcType=VARCHAR},
+	            	</if>
+        			<if test="metaKeywords != null">
+	        			#{metaKeywords, jdbcType=VARCHAR},
+	            	</if>
+        			<if test="password != null">
+	        			#{password, jdbcType=VARCHAR},
+	            	</if>
+        			<if test="summary != null">
+	        			#{summary, jdbcType=VARCHAR},
+	            	</if>
+        			<if test="topPriority != null">
+	        			#{topPriority, jdbcType=INTEGER},
+	            	</if>
+        			<if test="photoId != null">
+	        			#{photoId, jdbcType=INTEGER},
+	            	</if>
+        			<if test="likes != null">
+	        			#{likes, jdbcType=INTEGER},
+	            	</if>
+        			<if test="visits != null">
+	        			#{visits, jdbcType=INTEGER},
+	            	</if>
+        			<if test="createTime != null">
+	        			#{createTime, jdbcType=TIMESTAMP},
+	            	</if>
+        			<if test="updateTime != null">
+	        			#{updateTime, jdbcType=TIMESTAMP},
+	            	</if>
+        			<if test="status != null">
+	        			#{status, jdbcType=INTEGER},
+	            	</if>
+        </trim>
+    </insert>
+    
+    <!--修改 -->
+    <update id="update" parameterType="cn.panghu.blog.base.pojo.Article">
+        update tb_article
+        <set>
+	                <if test="title != null">
+                        title = #{title, jdbcType=VARCHAR},
+                    </if>
+	                <if test="categoryId != null">
+                        category_id = #{categoryId, jdbcType=INTEGER},
+                    </if>
+	                <if test="disallowComment != null">
+                        disallow_comment = #{disallowComment, jdbcType=INTEGER},
+                    </if>
+	                <if test="originalContent != null">
+                        original_content = #{originalContent, jdbcType=VARCHAR},
+                    </if>
+	                <if test="formatContent != null">
+                        format_content = #{formatContent, jdbcType=VARCHAR},
+                    </if>
+	                <if test="metaKeywords != null">
+                        meta_keywords = #{metaKeywords, jdbcType=VARCHAR},
+                    </if>
+	                <if test="password != null">
+                        password = #{password, jdbcType=VARCHAR},
+                    </if>
+	                <if test="summary != null">
+                        summary = #{summary, jdbcType=VARCHAR},
+                    </if>
+	                <if test="topPriority != null">
+                        top_priority = #{topPriority, jdbcType=INTEGER},
+                    </if>
+	                <if test="photoId != null">
+                        photo_id = #{photoId, jdbcType=INTEGER},
+                    </if>
+	                <if test="likes != null">
+                        likes = #{likes, jdbcType=INTEGER},
+                    </if>
+	                <if test="visits != null">
+                        visits = #{visits, jdbcType=INTEGER},
+                    </if>
+	                <if test="createTime != null">
+                        create_time = #{createTime, jdbcType=TIMESTAMP},
+                    </if>
+	                <if test="updateTime != null">
+                        update_time = #{updateTime, jdbcType=TIMESTAMP},
+                    </if>
+	                <if test="status != null">
+                        status = #{status, jdbcType=INTEGER},
+                    </if>
+        </set>
+        where 
+			id = #{id}
+    </update>
+    
+    <!-- 分页查询Article -->
+	<select id="findByPage" parameterType="cn.panghu.blog.base.pojo.Article" resultMap="ArticleResult">
+		SELECT 
+			<include refid="Base_Column_List" />
+		FROM tb_article 
+		<where>
+			<include refid="selectCondition" />
+		</where> 
+		ORDER BY id asc
+	</select>
+	
+	<!--批量保存 -->
+    <insert id="batchSave" useGeneratedKeys="true" keyProperty="id" keyColumn="id" parameterType="java.util.List">
+        insert into tb_article 
+        	<trim prefix="(" suffix=")" suffixOverrides=",">
+	        			title,
+	        			category_id,
+	        			disallow_comment,
+	        			original_content,
+	        			format_content,
+	        			meta_keywords,
+	        			password,
+	        			summary,
+	        			top_priority,
+	        			photo_id,
+	        			likes,
+	        			visits,
+	        			create_time,
+	        			update_time,
+        	</trim>
+        values
+        	<foreach collection="list" item="it" separator=",">
+        		<trim prefix="(" suffix=")" suffixOverrides=",">
+	        				#{it.title, jdbcType=VARCHAR},
+	        				#{it.categoryId, jdbcType=INTEGER},
+	        				#{it.disallowComment, jdbcType=INTEGER},
+	        				#{it.originalContent, jdbcType=VARCHAR},
+	        				#{it.formatContent, jdbcType=VARCHAR},
+	        				#{it.metaKeywords, jdbcType=VARCHAR},
+	        				#{it.password, jdbcType=VARCHAR},
+	        				#{it.summary, jdbcType=VARCHAR},
+	        				#{it.topPriority, jdbcType=INTEGER},
+	        				#{it.photoId, jdbcType=INTEGER},
+	        				#{it.likes, jdbcType=INTEGER},
+	        				#{it.visits, jdbcType=INTEGER},
+	        				#{it.createTime, jdbcType=TIMESTAMP},
+	        				#{it.updateTime, jdbcType=TIMESTAMP},
+	        	</trim>
+        	</foreach>
+    </insert>
+    
+    <!--批量保存(包含主键) -->
+    <insert id="batchSaveAll" parameterType="java.util.List">
+        insert into tb_article 
+        	<trim prefix="(" suffix=")" suffixOverrides=",">
+        		"id",
+	        		title,
+	        		category_id,
+	        		disallow_comment,
+	        		original_content,
+	        		format_content,
+	        		meta_keywords,
+	        		password,
+	        		summary,
+	        		top_priority,
+	        		photo_id,
+	        		likes,
+	        		visits,
+	        		create_time,
+	        		update_time,
+	        		status,
+        	</trim>
+        values
+        	<foreach collection="list" item="it" separator=",">
+        		<trim prefix="(" suffix=")" suffixOverrides=",">
+        			#{it.id, jdbcType=INTEGER},
+	    				#{it.title, jdbcType=VARCHAR},
+	    				#{it.categoryId, jdbcType=INTEGER},
+	    				#{it.disallowComment, jdbcType=INTEGER},
+	    				#{it.originalContent, jdbcType=VARCHAR},
+	    				#{it.formatContent, jdbcType=VARCHAR},
+	    				#{it.metaKeywords, jdbcType=VARCHAR},
+	    				#{it.password, jdbcType=VARCHAR},
+	    				#{it.summary, jdbcType=VARCHAR},
+	    				#{it.topPriority, jdbcType=INTEGER},
+	    				#{it.photoId, jdbcType=INTEGER},
+	    				#{it.likes, jdbcType=INTEGER},
+	    				#{it.visits, jdbcType=INTEGER},
+	    				#{it.createTime, jdbcType=TIMESTAMP},
+	    				#{it.updateTime, jdbcType=TIMESTAMP},
+	    				#{it.status, jdbcType=INTEGER},
+	        	</trim>
+        	</foreach>
+    </insert>
+	
+	
+	<!-- 批量删除 -->
+	<delete id="batchDelete" parameterType="java.util.List">
+        delete from tb_article where id in 
+	        <foreach collection="ids" item="id" separator="," open="(" close=")">
+	            #{id}
+	        </foreach>
+	</delete>
+</mapper>		

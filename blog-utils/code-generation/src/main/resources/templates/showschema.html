@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<title>code-generator</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Table列表</h1>
+
+	<table>
+		<!--  
+		<form action="#" th:action="@{/generate/setProperty}"
+			th:object="${settingObject}" method="post">
+			<p>
+				要生成代码的项目的包的根路径<input type="text" name="packagePath"
+					th:field="*{packagePath}" /> 路径格式：com.zr.cii.student
+			</p>
+
+			<input type="submit" value="设置提交" />
+		</form>
+		-->
+		<p>生成报名路径格式：com.zhongrui.bo.xxx、com.zhongrui.dao.xxx、com.zhongrui.service.xxx（xxx为schema名称）</p>
+		<form action="#" th:action="@{/generate/table}"
+			th:object="${TableInfo}" method="post" target="_blank">
+			<ul>模块名：<input type="text" name="schemaName" id="schema"/></ul>
+			<ul>
+				<input type="checkbox" name="allChecked" id="allChecked"
+					onclick="DoCheck()" />全选/取消
+				<li th:each="m : ${tablelist}"><input type="checkbox"
+					th:text="${m.tableName}" th:value="${m.tableName}" name="choose"></input>
+				</li>
+			</ul>
+			<input type="submit" value="选中提交" />
+		</form>
+	</table>
+</body>
+</html>
